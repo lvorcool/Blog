@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import  status
 from studyone.models import users
+import pymysql
 
 @api_view(['GET'])
 def userlist(request):
@@ -32,19 +33,27 @@ def adduser(request):
         }
         return Response(body, status=status.HTTP_200_OK)
 
-def deleteuser(request, usersname):
 
-    if request.method == 'POST':
-        queryset = users.objects.filter(usersname)
-        if queryset:
-            deleteuser = users.objects.filter(usersname=usersname)
-            deleteuser.detele()
-            return Response(status=status.HTTP_200_OK)
-        else:
-            body = {
-                    'msg': '该用户不存在'
-                }
-            return Response(body, status=status.HTTP_200_OK)
+# @api_view(['DELETE'])
+# def deleteuser(request, id):
+#     deleteuser = users.objects.get(id=id)
+#     if request.method == 'DELETE':
+#         deleteuser.delete()
+#         body = {
+#             'body':"删除用户成功",
+#             'msg' : '400002'
+#         }
+#         return Response(body, status=status.HTTP_200_OK)
+
+@api_view(['DELETE'])
+def deleteuser(request, id):
+    try:
+        deleteuser = users.objects.get(id=id)
+        deleteuser.delete()
+        return Response("删除用户成功",status=status.HTTP_200_OK)
+    except:
+        return Response("删除用户失败", status=status.HTTP_200_OK)
+
 
 
 

@@ -44,6 +44,14 @@ class Snippet(models.Model):
     # owner = models.ForeignKey('auth.User', related_name='snippets', on_delete=models.CASCADE)
     # highlighted = models.TextField(null=True)
 
-
     class Meta:
         ordering = ('created',)
+
+class account(models.Model):
+    payid = models.ManyToManyField(to='users',blank=False)
+    # money = models.IntegerField(blank=False)
+    createOn = models.DateTimeField(auto_now=True)
+    modifiedOn = models.DateTimeField(auto_now_add=True)
+
+    def __int__(self):
+        return self.acctid

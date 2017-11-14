@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Blog.iml" filepath="$PROJECT_DIR$/.idea/Blog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../t1nkuy/.idea/MxShop.iml" filepath="$PROJECT_DIR$/../../t1nkuy/.idea/MxShop.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/imooc-pymysql/.idea/imooc-pymysql.iml" filepath="$USER_HOME$/PycharmProjects/imooc-pymysql/.idea/imooc-pymysql.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../imoocRequests/.idea/imoocRequests.iml" filepath="$PROJECT_DIR$/../../imoocRequests/.idea/imoocRequests.iml" />
     </modules>
   </component>
 </project>
