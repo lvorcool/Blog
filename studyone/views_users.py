@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import  status
 from studyone.models import users
+import json
 import pymysql
 
 @api_view(['GET'])
@@ -34,73 +35,29 @@ def adduser(request):
         return Response(body, status=status.HTTP_200_OK)
 
 
-# @api_view(['DELETE'])
-# def deleteuser(request, id):
-#     deleteuser = users.objects.get(id=id)
-#     if request.method == 'DELETE':
-#         deleteuser.delete()
-#         body = {
-#             'body':"删除用户成功",
-#             'msg' : '400002'
-#         }
-#         return Response(body, status=status.HTTP_200_OK)
 
-@api_view(['DELETE'])
-def deleteuser(request, id):
+
+@api_view(['POST'])
+def deleteuser(request):
+    # print(request.POST)
+    print(request.body)
     try:
-        deleteuser = users.objects.get(id=id)
+        # id = json.loads(request.body).get('id')
+        deleteuser = users.objects.filter(id=id)
         deleteuser.delete()
         return Response("删除用户成功",status=status.HTTP_200_OK)
-    except:
-        return Response("删除用户失败", status=status.HTTP_200_OK)
+    except Exception as e:
+        print(e)
+        return Response("用户不存在,无法删除!", status=status.HTTP_200_OK)
 
 
 
 
 
 
-'''
-        queryset = request.GET.get('id')
-        user_list = users.objects.order_by('-id')
-
-        if queryset:
-            user_list = users.objects.filter(id=queryset)
-        else:
-            user_list = users.objects.all()
-'''
 
 
-'''
-@api_view(['POST'])
-def adduser(request):
 
-    if request.method == "POST":
-        form = UserForm(data=request.data)
-        if form.is_valid():
-            usersname = UserForm["usersname"]
-            password = UserForm["password"]
-            name = UserForm["name"]
-            u = UserForm(usersname=usersname, password=password,name=name)
-            u.save()
-            return Response(serializers.data, status=status.HTTP_201_CREATED)
-        else:
-            print("你确定错了吗")
-            body = {
-                'body':serializers.errors,
-                'msg':'400001'
-            }
-            return JsonResponse(body, status=status.HTTP_400_BAD_REQUEST)
-'''
-
-
-#
-# result = users.objects.filter(id=id)
-# if result:
-#     return JsonResponse({'status':10022, 'message':'用户id已存在,请重新填写'})
-#
-# result = users.objects.filter(usersname=usersname)
-# if result:
-#     return JsonResponse({'status':10023, 'message': '用户账号已存在,请重新填写'})
 
 
 
